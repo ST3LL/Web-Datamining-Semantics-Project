@@ -35,7 +35,7 @@ The installation is simple. Run ```app.py``` and go to ```localhost:5000``` with
 
 Data is stored on the ```data``` repository of the project.
 
-For the queries : Run ```queries.py```.
+For the queries. Run ```queries.py```.
 
-In order to get data to rdf : Run ```get_data_to_rdf.py``` you just have to run the process once.
+In order to get data to rdf. Run ```get_data_to_rdf.py``` you just have to run the process once.
 
