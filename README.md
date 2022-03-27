@@ -29,6 +29,8 @@ Link :
 pip install requirements.txt
 ```
 
-## Usage
+## Installation
 
+The installation is simple. Run ```app.py``` and go to ```localhost:5000``` with a web browser.
 
+Data is stored on the ```data``` repository of the project.
