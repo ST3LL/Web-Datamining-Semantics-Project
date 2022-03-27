@@ -6,3 +6,4 @@ pandas
 openpyxl
 owlready2
 rdflib
+tqdm
