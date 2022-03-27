@@ -3,9 +3,15 @@
 <meta charset="UTF-8" />
 <title>Lost Objects Search SNCF API</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<script type="text/javascript" src="{{ url_for('static', filename='functions.js') }}" ></script>
 
-	<body>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin=""></script>
+
+<body>
 	<div class="logo">
 		<a href="https://www.sncf.com/en"><img src="{{ url_for('static', filename='logo_sncf.png') }}" > </a>
 	</div>
@@ -27,41 +33,35 @@
 					<input type="text" minlength="5" maxlength="5" id="zipcode_selected" name="zipcode_selected" placeholder="Enter the zipcode of the train station">
 				</div>
 
-				<!--
-				<div class="input-group">
-					<label>Date and time of the lost:</label>
-					<input type="datetime-local" id="lost_date_selected"
-                           name="lost_date_selected"
-                           min="2022-01-01" max="{{ last_date }}">
+				<div class="select-nature-div">
+						<label>Only objects no recovered yet?</label>
+						<select id="rdate_selected" name="rdate_selected" class="selectpicker form-control">
+							{% for elt in ["Oui", "Non"] %}
+							<option value="{{ elt }}">{{ elt }}</option>
+							{% endfor %}
+						</select>
 				</div>
 			</div>
-			-->
 
-			<div class="select-nature-div">
-					<label>Only objects no recovered yet?</label>
-					<select id="rdate_selected" name="rdate_selected" class="selectpicker form-control">
-						{% for elt in ["Oui", "Non"] %}
-						<option value="{{ elt }}">{{ elt }}</option>
-						{% endfor %}
-					</select>
-			</div>
-			<!--
-				<div>
-					<label>Only objects no recovered yet?</label>
-					<input type="radio" name="options" id="option1" value="Oui"> Oui </input><br>
-					<input type="radio" name="options" id="option2" value="Non"> Non </input><br>
-				</div>
-				-->
-			</div>
 			<div class="selectpicker form-control">
 				<button type="submit" class="btn">Results</button>
 			</div>
 		</form>
 	</section>
+
 	<div style="text-align: center;">
-			<p>Last Object found on '{{ last_date }}' at '{{ last_hour }}' at '{{ last_place }}'!</p>
+		<p>Last Object '{{ last_object }}' found on '{{ last_date }}' at '{{ last_hour }}' at '{{ last_place }}'!</p>
 	</div>
-	</body>
+
+
+	<div id="map"></div>
+
+	<script type="text/javascript" src="{{ url_for('static', filename='functions.js') }}"></script>
+
+	<script>
+		{% for marker in markers %}
+		L.marker([{{ marker['lat'] }}, {{ marker['lon'] }}]).addTo(map).bindPopup("{{ marker['popup'] }}").openPopup();
+		{% endfor %}
+	</script>
+</body>
 </html>
-
-

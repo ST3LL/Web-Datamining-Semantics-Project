@@ -40,3 +40,10 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+#map{
+    width:100% ;
+    right: 0;
+    height:600px;
+    position: absolute;
+}
